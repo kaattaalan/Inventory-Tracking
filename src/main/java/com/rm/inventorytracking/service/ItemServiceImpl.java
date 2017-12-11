@@ -35,4 +35,14 @@ public class ItemServiceImpl implements ItemService{
             System.out.println(itemRepository.findOne(item.getId()));
         }
     }
+
+    @Override
+    public Iterable<Item> getItems() {
+        return itemRepository.findAll(); //CRUD repository fonksiyonlarından findAll() kullanarak bütün itemları döndürdük.
+    }
+
+    @Override
+    public void deleteItemById(long id) {
+        itemRepository.delete(id); //CRUD repository fonksiyonlarından delete() kullanarak item id'sini parametre olarak gönderip item'ı sildik.
+    }
 }

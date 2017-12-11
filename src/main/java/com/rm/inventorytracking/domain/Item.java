@@ -9,15 +9,12 @@ public class Item {
     //primary key olan id'yi otomatik olarak oluşturuyoruz
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" ,nullable = false ,updatable = false)
-
     private long id;
 
     @Column(name = "code" ,nullable = false ,updatable = false ,unique = true)
-
     private String inventoryCode;
 
     @Column(name = "type" ,nullable = false)
-
     private String type;
 
     public Item(){

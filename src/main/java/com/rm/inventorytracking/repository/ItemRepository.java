@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * dataya erişim objemiz
  */
 
-public interface ItemRepository extends CrudRepository<Item , Long> {
+public interface ItemRepository extends CrudRepository<Item,Long> {
 }

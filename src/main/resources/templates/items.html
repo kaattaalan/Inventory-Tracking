@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Items</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/items/add">Add item</a></li>
+    </ul>
+</nav>
+<table>
+    <tr>
+        <th></th>
+        <th>Item code</th>
+        <th>Item type</th>
+    </tr>
+    <tr th:each="item : ${items}">
+        <td>
+            <form th:action="@{/items/} + ${item.id}" th:method="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td th:text="${item.inventoryCode}">Item code will appear here</td>
+        <td th:text="${item.type}">Item type will appear here</td>
+    </tr>
+</table>
+</body>
+</html>
