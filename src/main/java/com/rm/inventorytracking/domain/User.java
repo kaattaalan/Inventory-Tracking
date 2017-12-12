@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
+
 @Entity
 public class User {
     @Id
@@ -13,12 +14,12 @@ public class User {
     private long id;
 
     @NotEmpty
-    @Size(min = 3, max = 20)
+    @Size(min=3, max=20)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotEmpty
-    @Size(min = 6, max = 20)
+    @Size(min=6, max=20)
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -30,34 +31,37 @@ public class User {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @OneToMany(mappedBy = "user") // User ve Item aralarında one-to-many ilişkisi olan birer Entity.
-                                  // User‘ın itemlarını bu Set içerisinde belirtiyoruz
+    @OneToMany(mappedBy = "user") //user ve ıtem arlarında one-to-many ilişkisi olan birer entity
+                                 // userın itemlarını bu set içerisinde belirtiyoruz
     private Set<Item> items;
+
     public User() {
+
     }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+
+
+
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -86,5 +90,10 @@ public class User {
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return username;
     }
 }

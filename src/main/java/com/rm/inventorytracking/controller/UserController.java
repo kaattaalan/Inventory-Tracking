@@ -30,9 +30,12 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleRegisterForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        //valid ve bindind result'ı form validationı için kullanıyoruz.
+        //valid ve bindingresult'ı form validationı için kullanıyoruz.
         if (bindingResult.hasErrors())
+        {
             return "register";
+        }
+
 
         userService.addUser(user);
         return "redirect:/";
