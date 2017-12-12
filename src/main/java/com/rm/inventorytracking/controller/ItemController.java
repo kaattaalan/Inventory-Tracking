@@ -50,7 +50,7 @@ public class ItemController {
         return new ModelAndView("items","items",itemService.getItems());
     }
 
-    //item silindikten sonra /items URL'ine yönlendirme yap
+    //item/{id} silindikten sonra /items URL'ine yönlendirme yap
     @RequestMapping(value = "/items/{id}",method = RequestMethod.DELETE)
     public String handleItemDelete(@PathVariable Long id) {
         itemService.deleteItemById(id);

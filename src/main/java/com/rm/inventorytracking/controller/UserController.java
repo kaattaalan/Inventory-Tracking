@@ -17,14 +17,17 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     private final UserService userService;
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @RequestMapping("/register")
     public ModelAndView getRegisterPage() {
         return new ModelAndView("register", "user", new User());
     }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleRegisterForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         //valid ve bindind result'ı form validationı için kullanıyoruz.
@@ -34,6 +37,7 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/";
     }
+
     @RequestMapping("/users")
     //userpage'e yönlendirme
     public ModelAndView getUsersPage() {
