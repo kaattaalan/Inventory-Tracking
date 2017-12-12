@@ -17,6 +17,10 @@ public class Item {
     @Column(name = "type" ,nullable = false)
     private String type;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Item(){
 
     }
