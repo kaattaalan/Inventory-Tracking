@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-
+import java.util.NoSuchElementException;
 
 
 @Controller
@@ -45,5 +45,21 @@ public class UserController {
     //userpage'e yönlendirme
     public ModelAndView getUsersPage() {
         return new ModelAndView("users", "users", userService.getUsers());
+    }
+
+    /**
+     * Controllerda url'deki id'ye sahip kullanıcı olup olmadığını kontrol ediyoruz.
+     * Eğer user yoksa exception throw ediyoruz. Varsa numberOfItemsByType metodunun dondurdugu map'i view'a gönderiyoruz.
+     * @param id
+     * @return
+     * @Author: Mehmet Koca
+     */
+    @RequestMapping(value = "/users/{id}/items")
+    public ModelAndView getUserPage(@PathVariable Long id) {
+        if (null == userService.getUserById(id)){
+            throw new NoSuchElementException("User with id: " + id + " not found.");
+        } else {
+            return new ModelAndView("userItems","items",userService.numberOfItemsByType(id));
+        }
     }
 }
