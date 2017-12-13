@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Rooms</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/items">Items</a></li>
+    </ul>
+</nav>
+<table>
+    <tr>
+        <th>Room Name</th>
+
+    </tr>
+    <tr th:each="room : ${rooms}">
+        <td><a th:href="@{/rooms/} + ${room.id} + @{/items}" th:text="${room.name_room}">Room Name</a></td>
+
+
+    </tr>
+</table>
+</body>
+</html>
