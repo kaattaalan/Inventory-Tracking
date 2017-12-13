@@ -1,7 +1,9 @@
 package com.rm.inventorytracking.controller;
 
+import com.rm.inventorytracking.domain.Item;
 import com.rm.inventorytracking.domain.ItemAddForm;
 import com.rm.inventorytracking.domain.ItemAssignForm;
+import com.rm.inventorytracking.domain.User;
 import com.rm.inventorytracking.service.ItemService;
 import com.rm.inventorytracking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,12 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Controller
 public class ItemController {
     private final ItemService itemService;
     private final UserService userService;
+
 
     @Autowired
     public ItemController(ItemService itemService, UserService userService) {
@@ -38,7 +42,8 @@ public class ItemController {
         return new ModelAndView("items", model);
     }
 
-    //Bupdate işlemi yaptığımız için, PUT isteği yolluyoruz.
+
+    //update işlemi yaptığımız için, PUT isteği yolluyoruz.
     // assignItem methodunun parametreleri DTO’dan gelen usernamei ve PathVariable olan item id‘sini kullanıyoruz.
     // İşlem tamamlandıktan sonra kullanıcıyı items sayfasına yönlendiriyoruz.
     @RequestMapping(value = "/items/{id}", method = RequestMethod.PUT)
@@ -53,7 +58,7 @@ public class ItemController {
 
     @RequestMapping(value = "/items", method = RequestMethod.POST)
     public String handleItemAdd(@Valid @ModelAttribute("itemForm") ItemAddForm form, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) ////valid ve bindingresult'ı form validationı için kullanıyoruz.
+        if (bindingResult.hasErrors())
             return "addItem";
 
         itemService.addItem(form);

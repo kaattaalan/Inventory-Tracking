@@ -8,6 +8,7 @@ import com.rm.inventorytracking.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Set;
 
 /**
@@ -24,6 +25,10 @@ public class ItemServiceImpl implements ItemService {
         this.itemRepository = itemRepository;
         this.userService = userService;
     }
+    public Item getItemByCode(String code) {
+        return itemRepository.findByInventoryCode(code);
+    }
+
     public void addItem(ItemAddForm form) { //itemin type'ı stoğa kaç tane ekleneceği bilgisini alıyoruz
 
         for (int i = 0; i < form.getAmount(); i++) {
@@ -37,9 +42,8 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-    @Override
     public Iterable<Item> getItems() {
-        return itemRepository.findAll(); //CRUD repository fonksiyonlarından findAll() kullanarak bütün itemları döndürdük.
+        return itemRepository.findAll();
     }
 
     @Override

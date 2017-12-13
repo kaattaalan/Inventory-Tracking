@@ -13,15 +13,12 @@ import javax.validation.constraints.Size;
  */
 
 public class ItemAddForm {
-
     @NotEmpty
-    @Size(min = 2, max = 50)
+    @Size(min=2, max=50)
     private String itemType;
 
-    @NotNull //@notempty, @size, @notnull Bunları kullanarak kullanıcıdan aldığımız bilginin Service’e taşınmadan istediğimiz şekilde olduğuna emin olmuş oluyoruz.
+    @NotNull
     private int amount = 1; //default
-
-
 
     public String getItemType() {
         return itemType;

@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
-    User addUser(User user);
-    Iterable<User> getUsers();
-    List<String> getUsernames();
+    User getUserById(long id);
 
     User getUserByUsername(String username);
 
-    User getUserById(long id);
+    User addUser(User user);
 
-    Map<String,List<Item>> numberOfItemsByType(long userId);
+    Iterable<User> getUsers();
+
+    Map<String, List<Item>> numberOfItemsByType(long userId);
+
+    List<String> getUsernames();
 }
