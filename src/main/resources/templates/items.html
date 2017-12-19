@@ -27,13 +27,13 @@
         </td>
         <td th:text="${item.inventoryCode}">Item code</td>
         <td th:text="${item.type}">Item type</td>
-        <td th:text="${item.user}">Belongs to</td>
+        <td th:text="${item.room}">Belongs to</td>
         <td>
             <form th:action="@{/items/} + ${item.id}" th:method="put">
-                <select th:field="*{assignForm.username}">
-                    <option th:each="username : ${usernames}"
-                            th:value="${username}"
-                            th:text="${username}">Username will appear here
+                <select th:field="*{assignForm.roomName}">
+                    <option th:each="roomName : ${roomNames}"
+                            th:value="${roomName}"
+                            th:text="${roomName}">Username will appear here
                     </option>
                 </select>
                 <button type="submit">Assign</button>

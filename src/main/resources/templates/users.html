@@ -10,6 +10,8 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/items">Items</a></li>
+        <li><a href="/rooms">Rooms</a></li>
+        <li><a href="/register">Register</a></li>
     </ul>
 </nav>
 <table>
@@ -19,10 +21,11 @@
         <th>Last name</th>
     </tr>
     <tr th:each="user : ${users}">
-        <td><a th:href="@{/users/} + ${user.id} + @{/items}" th:text="${user.username}">Username</a></td>
+        <td><a th:href="@{/users/} + ${user.id} + @{/rooms}" th:text="${user.username}">Username</a></td>
         <td th:text="${user.name}">Name</td>
         <td th:text="${user.lastName}">Last Name</td>
     </tr>
 </table>
+
 </body>
 </html>

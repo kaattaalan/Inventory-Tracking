@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
 /**
- * girilen kullanıcı adının sistemde zaten var olup olmadığını kullanıcıya bildiricez
+ * girilen kullanıcı sistemde var mı yok mu ona bakıcaz
  */
 @Component
 public class RegisterValidator implements Validator {

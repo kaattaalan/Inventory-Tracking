@@ -14,22 +14,26 @@ public class Item {
 
     @Column(name = "type", nullable = false)
     private String type;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Item() {
+
+    public Item(){
 
     }
 
-    public Item(String inventoryCode, String type) {
+    public Item(String inventoryCode, String type){
         this.inventoryCode = inventoryCode;
         this.type = type;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public long getId() {
@@ -52,19 +56,13 @@ public class Item {
         this.type = type;
     }
 
-    public User getUser() {
-        return user;
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", inventoryCode='" + inventoryCode + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 }

@@ -8,15 +8,16 @@
 <nav role="navigation">
     <ul>
         <li><a href="/">Home</a></li>
+        <li><a href="/rooms">Rooms</a></li>
     </ul>
 </nav>
 
-<form th:action="@{/add_room}" th:object="${room}" method="post">
+<form th:action="@{/rooms/add}" th:object="${room}" method="post">
     <table>
         <tr>
-            <td>User Name:</td>
-            <td><input type="text" th:field="*{name_room}" /></td>
-            <td th:if="${#fields.hasErrors('name_room')}" th:errors="*{name_room}">Username Error</td>
+            <td>Room Name:</td>
+            <td><input type="text" th:field="*{roomName}" /></td>
+            <td th:if="${#fields.hasErrors('roomName')}" th:errors="*{roomName}">Room Name Error</td>
             <td th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}">Global Error</td>
         </tr>
 

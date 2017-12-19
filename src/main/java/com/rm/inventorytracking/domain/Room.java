@@ -8,35 +8,36 @@ import java.util.Set;
 
 @Entity
 public class Room {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private long id;
     @NotEmpty
     @Size(min = 3, max = 20)
-    @Column(name = "name_room", nullable = false, unique = true)
-    private String name_room;
+    @Column(name = "roomName", nullable = false, unique = true)
+    private String roomName;
 
     @OneToMany(mappedBy = "room")
     private Set<Item> items;
 
+    public Room(){
 
-    public Room(){}
-
-    public Room(String name_room){
-        this.name_room = name_room;
+    }
+    public Room(String roomName){
+        this.roomName = roomName;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public String getName_room() {
-        return name_room;
+
+    public String getRoomName() {
+        return roomName;
     }
-    public void setName_room(String name_room) {
-        this.name_room = name_room;
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public Set<Item> getItems() {
@@ -47,5 +48,21 @@ public class Room {
         this.items = items;
     }
 
+    @Override
+    public String toString(){
+        return roomName;
+    }
 
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Inventory Home</title>
 </head>
@@ -10,8 +9,9 @@
         <li><a href="/">Home</a></li>
         <li><a href="/users">Users</a></li>
         <li><a href="/items">Items</a></li>
+        <li><a href="/rooms">Rooms</a> </li>
         <li sec:authorize="isAuthenticated()">
-            <a th:href="@{/users/} + ${user.id} + @{/items}">My Items</a>
+            <a th:href="@{/users/} + ${user.id} + @{/rooms}">My Rooms</a>
         </li>
     </ul>
 </nav>
@@ -32,8 +32,6 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Log Out"/>
     </form>
-    <p>Click <a th:href="@{/items}">here</a> to see items.</p>
-    <p>Click <a th:href="@{/logs}">here</a> to see logs.</p>
 </div>
 </body>
 </html>

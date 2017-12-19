@@ -1,13 +1,14 @@
 package com.rm.inventorytracking.domain;
 
 public class ItemAssignForm {
-    private String username;
 
-    public String getUsername() {
-        return username;
+    private String roomName;
+
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

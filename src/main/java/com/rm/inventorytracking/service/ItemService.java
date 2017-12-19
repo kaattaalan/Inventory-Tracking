@@ -8,15 +8,10 @@ public interface ItemService {
 
     void addItem(ItemAddForm form);
 
-
     Iterable<Item> getItems();
-
-    //id'yi parametre alarak item silmek
     void deleteItemById(long id);
 
+    Item getItemById( long id);
+    Item assignItem(String roomName, long itemId);
 
-    // userın item listesine ilgili itemın eklenmesi ve bunun yanında, o itemın userı olarakta
-    // select boxdan seçtiğimiz userın set edilmesi için bu tanımlamaları yapıyoruz
-    Item getItemById(long id);
-    Item assignItem(String username, long itemId);
 }

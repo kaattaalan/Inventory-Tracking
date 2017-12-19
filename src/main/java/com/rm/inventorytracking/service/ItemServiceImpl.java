@@ -3,68 +3,59 @@ package com.rm.inventorytracking.service;
 
 import com.rm.inventorytracking.domain.Item;
 import com.rm.inventorytracking.domain.ItemAddForm;
+import com.rm.inventorytracking.domain.Room;
 import com.rm.inventorytracking.domain.User;
 import com.rm.inventorytracking.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.Set;
-
-/**
- * model objesini almak, yaratmak, güncellemek
- */
 
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
-    private final UserService userService;
+    private final RoomService roomService;
 
     @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository, UserService userService) {
+    public ItemServiceImpl(ItemRepository itemRepository,RoomService roomService) {
         this.itemRepository = itemRepository;
-        this.userService = userService;
-    }
-    public Item getItemByCode(String code) {
-        return itemRepository.findByInventoryCode(code);
-    }
+        this.roomService = roomService;
 
-    public void addItem(ItemAddForm form) { //itemin type'ı stoğa kaç tane ekleneceği bilgisini alıyoruz
-
+    }
+    public void addItem(ItemAddForm form) {
         for (int i = 0; i < form.getAmount(); i++) {
-
             String inventoryCode = Long.toHexString(Double.doubleToLongBits(Math.random())).substring(10); //generate random string
-
             Item item = new Item(inventoryCode, form.getItemType());
-
             itemRepository.save(item);
+
             System.out.println(itemRepository.findOne(item.getId()));
         }
     }
-
+    @Override
     public Iterable<Item> getItems() {
         return itemRepository.findAll();
     }
-
     @Override
     public void deleteItemById(long id) {
-        itemRepository.delete(id); //CRUD repository fonksiyonlarından delete() kullanarak item id'sini parametre olarak gönderip item'ı sildik.
+        itemRepository.delete(id);
     }
+
 
     public Item getItemById(long id) {
         return itemRepository.findOne(id);
     }
-    // // ItemAssignForm‘dan gelecek olan kullanıcı adına sahip userın item listesine, itemId‘ye sahip Item‘ı ekliyoruz
 
-    public Item assignItem(String username, long itemId) {
-        User user = userService.getUserByUsername(username);
+
+    public Item assignItem(String roomName, long itemId) {
+        Room room = roomService.getRoomByRoomName(roomName);
         Item item = getItemById(itemId);
-        //bu itemın userını, getUserByUsername methoduyla aldığımız user’a set ediyoruz
-        Set<Item> itemList = user.getItems();
+        Set<Item> itemList = room.getItems();
         itemList.add(item);
-        user.setItems(itemList);
-        //database'e ekliyoruz.
-        item.setUser(user);
+        room.setItems(itemList);
+
+        item.setRoom(room);
         return itemRepository.save(item);
     }
+
+
 }

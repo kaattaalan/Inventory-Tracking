@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>User Registration</title>
 </head>
@@ -9,7 +10,6 @@
         <li><a href="/">Home</a></li>
     </ul>
 </nav>
-
 
 <form th:action="@{/register}" th:object="${user}" method="post">
     <table>
@@ -38,7 +38,6 @@
             <td><button type="submit">Submit</button></td>
         </tr>
     </table>
-
 </form>
 </body>
 </html>
