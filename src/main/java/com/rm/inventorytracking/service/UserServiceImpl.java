@@ -1,16 +1,14 @@
 package com.rm.inventorytracking.service;
 
 
-import com.rm.inventorytracking.domain.Item;
+
 import com.rm.inventorytracking.domain.Room;
 import com.rm.inventorytracking.domain.User;
 import com.rm.inventorytracking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
 

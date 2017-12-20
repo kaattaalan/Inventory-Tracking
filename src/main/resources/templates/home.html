@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Inventory Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
-<body>
-<nav role="navigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/users">Users</a></li>
-        <li><a href="/items">Items</a></li>
-        <li><a href="/rooms">Rooms</a> </li>
-        <li sec:authorize="isAuthenticated()">
-            <a th:href="@{/users/} + ${user.id} + @{/rooms}">My Rooms</a>
-        </li>
-    </ul>
-</nav>
-
-<div sec:authorize="isAnonymous()">
-    <h1>Welcome!</h1>
+<body style="background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);">
+<!--<nav role="navigation">-->
+    <!--<ul>-->
+        <!--<li><a href="/">Home</a></li>-->
+        <!--<li><a href="/users">Users</a></li>-->
+        <!--<li><a href="/items">Items</a></li>-->
+        <!--<li sec:authorize="isAuthenticated()">-->
+            <!--<a th:href="@{/users/} + ${user.id} + @{/items}">My Items</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</nav>-->
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+            <a class="navbar-brand" href="#">Inventory Tracking</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rooms">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/items">Items</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/users/} + ${user.id} + @{/items}">My Items</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
 
-<div sec:authorize="isAuthenticated()">
-    <h1 th:text="'Welcome, ' + ${user.username} + '!'"></h1>
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="jumbotron" style="">
+            <h1 class="display-3" sec:authorize="isAnonymous()">Welcome!</h1>
+            <h1 class="display-3" sec:authorize="isAuthenticated()" th:text="'Welcome, ' + ${user.username} + '!'"></h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <div  sec:authorize="isAnonymous()">
+                <p class="lead">
+                    <a class="btn btn-warning btn-lg" th:href="@{/register}">Register</a> or <a class="btn btn-success btn-lg" th:href="@{/login}">Login</a>
+                </p>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger btn-lg" type="submit" value="Log Out"/>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div sec:authorize="isAnonymous()">
-    <p>Click <a th:href="@{/login}">here</a> to login.</p>
-    <p>Click <a th:href="@{/register}">here</a> to register.</p>
-</div>
-<div sec:authorize="isAuthenticated()">
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Log Out"/>
-    </form>
+<!--Footer-->
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">© 2017</p>
+    </div>
 </div>
 </body>
 </html>

@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 
 import javax.persistence.*;
@@ -15,12 +14,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "user_id", nullable = false, updatable = false)
     private long id;
     @NotEmpty
     @Size(min = 3, max = 20)
@@ -33,6 +33,10 @@ public class User implements UserDetails {
     @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 
     @NotEmpty
@@ -94,6 +98,14 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return username;
@@ -115,11 +127,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    //user rollerinin çekildiği yer
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("USER");
-        List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
-        list.add(simpleGrantedAuthority);
-        return list;
+        return getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+                .collect(Collectors.toList());
     }
 }

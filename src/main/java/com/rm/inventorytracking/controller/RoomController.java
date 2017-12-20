@@ -7,6 +7,7 @@ import com.rm.inventorytracking.service.RoomService;
 import com.rm.inventorytracking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,6 +55,7 @@ public class RoomController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping("/rooms")
     public ModelAndView getRoomsPage(){
         Map<String, Object> model = new HashMap<String, Object>();
