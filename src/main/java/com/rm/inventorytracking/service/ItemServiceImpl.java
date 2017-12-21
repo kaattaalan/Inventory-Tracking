@@ -9,12 +9,15 @@ import com.rm.inventorytracking.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final RoomService roomService;
+    private final  Date date = new Date();
 
     @Autowired
     public ItemServiceImpl(ItemRepository itemRepository,RoomService roomService) {
@@ -25,7 +28,9 @@ public class ItemServiceImpl implements ItemService {
     public void addItem(ItemAddForm form) {
         for (int i = 0; i < form.getAmount(); i++) {
             String inventoryCode = Long.toHexString(Double.doubleToLongBits(Math.random())).substring(10); //generate random string
-            Item item = new Item(inventoryCode, form.getItemType());
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String strDate = sdfDate.format(date);
+            Item item = new Item(inventoryCode, form.getItemType(),strDate);
             itemRepository.save(item);
 
             System.out.println(itemRepository.findOne(item.getId()));

@@ -15,6 +15,7 @@
     <tr>
         <th></th>
         <th>Item code</th>
+        <th>Upload Date</th>
         <th>Item type</th>
         <th>Belongs to</th>
         <th></th>
@@ -26,6 +27,7 @@
             </form>
         </td>
         <td th:text="${item.inventoryCode}">Item code</td>
+        <td th:text="${item.date}">Upload Date/td>
         <td th:text="${item.type}">Item type</td>
         <td th:text="${item.room}">Belongs to</td>
         <td>

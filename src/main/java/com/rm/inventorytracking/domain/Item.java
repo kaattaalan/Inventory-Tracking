@@ -18,13 +18,24 @@ public class Item {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    @Column(name = "date", nullable = false)
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Item(){
 
     }
 
-    public Item(String inventoryCode, String type){
+    public Item(String inventoryCode, String type, String date){
         this.inventoryCode = inventoryCode;
+        this.date = date;
         this.type = type;
     }
 
