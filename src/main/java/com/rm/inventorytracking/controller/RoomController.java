@@ -48,7 +48,7 @@ public class RoomController {
     public String handleAddRoomForm(@Valid @ModelAttribute("room") Room room, BindingResult bindingResult){
 
         if(bindingResult.hasErrors())
-            return "rooms/add";
+            return "redirect:/rooms/add";
 
         roomService.addRoom(room);
         return "redirect:/";
