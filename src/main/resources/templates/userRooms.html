@@ -38,19 +38,10 @@
 <div class="container" style="margin-top: 10px;">
     <div th:each="entry : ${rooms}" th:with="roomList=${entry.value}">
         <div class="alert alert-success" role="alert">
-            <p>The name of my room: <strong th:text="${entry.key} "></strong></p>
+            <p>The name of my room: <a th:text="${entry.key}"></a></p>
             <p th:each="room : ${roomList}">My room's ID: <strong th:text="${room.id}"></strong></p>
+            <p><a th:each="room:${roomList}" th:href="@{/rooms/} + ${room.id} + @{/items}+'?name='+${room.roomName}">Go to room</a></p>
         </div>
-        <!--<table class="table table-striped" style="background-color: #ecf0f1;">-->
-            <!--<tr>-->
-                <!--<th scope="col">Room Id</th>-->
-                <!--<th scope="col">Room Name</th>-->
-            <!--</tr>-->
-            <!--<tr th:each="room : ${roomList}">-->
-                <!--<td th:text="${room.id}">Room ID</td>-->
-                <!--<td th:text="${room.roomName}">Room Name</td>-->
-            <!--</tr>-->
-        <!--</table>-->
     </div>
 </div>
 </body>
