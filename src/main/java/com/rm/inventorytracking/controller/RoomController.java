@@ -29,6 +29,7 @@ public class RoomController {
     User user;
 
 
+
     @Autowired
     public RoomController(RoomService roomService, UserService userService){
         this.userService = userService;
@@ -51,7 +52,7 @@ public class RoomController {
             return "redirect:/rooms/add";
 
         roomService.addRoom(room);
-        return "redirect:/";
+        return "redirect:/rooms";
 
     }
 

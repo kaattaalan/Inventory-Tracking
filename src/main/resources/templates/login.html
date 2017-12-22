@@ -5,22 +5,14 @@
     <title>Login | Inventory Tracking</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-
 </head>
 <body style="background-color: #2c3e50">
 <div sec:authorize="isAuthenticated()">
     <meta http-equiv="refresh" content="0;url=/home" />
 </div>
-
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<!--<form th:action="@{/login}" method="post">-->
-    <!--<div><label> User Name : <input type="text" name="username"/> </label></div>-->
-    <!--<div><label> Password: <input type="password" name="password"/> </label></div>-->
-    <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-    <!--<div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
 <div class="container">
     <div class="row" style="padding-top: 10px;">
         <div class="col-md-12 col-sm-12">
@@ -41,7 +33,7 @@
                             <a class="nav-link" href="/items"><i class="fas fa-cubes"></i> Items</a>
                         </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" th:href="@{/users/} + ${user.id} + @{/items}">My Items</a>
+                            <a class="nav-link" th:href="@{/users/} + ${user.id} + @{/rooms}">My Rooms</a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +41,6 @@
         </div>
     </div>
 </div>
-
 <div class="container">
     <div style="margin-top: 10px;">
         <div class="mx-auto" style="width: 400px; text-align: center">
@@ -69,7 +60,6 @@
                             <input type="password"  name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
                         <button type="submit" class="btn btn-success btn-lg">Login</button>
                     </form>
                 </div>
@@ -78,11 +68,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 </body>
 </html>
