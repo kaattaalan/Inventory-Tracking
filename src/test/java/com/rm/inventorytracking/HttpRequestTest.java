@@ -10,6 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * Local server port'unu kullanarak sayfaya request atıyoruz.
+ * Welcome mesajını gösterip göstermediğini denetliyoruz.
+ * Welcome mesajı, giriş yapan kullanıcıyı karşılayan ekranda gösteriliyor.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HttpRequestTest {

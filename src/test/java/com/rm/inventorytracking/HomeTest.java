@@ -9,6 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * Home Contoller'ın boş olup olmadığını kontrol ediyoruz.
+ * Home Controller, sitemizin anasayfasını oluşturuyor.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HomeTest {

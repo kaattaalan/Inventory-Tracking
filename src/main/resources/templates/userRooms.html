@@ -26,9 +26,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/items"><i class="fas fa-cubes"></i> Items</a>
                         </li>
-                        <!--<li class="nav-item active" sec:authorize="isAuthenticated()">-->
-                        <!--<a class="nav-link" th:href="@{/users/} + ${user.id} + @{/rooms}">My Rooms</a>-->
-                        <!--</li>-->
                     </ul>
                 </div>
             </nav>
@@ -36,10 +33,17 @@
     </div>
 </div>
 <div class="container" style="margin-top: 10px;">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading"><i class="fas fa-info-circle"></i> Info for Rooms</h4>
+        <p>If there is a room assigned to you, it will be listed below.</p>
+        <p class="mb-0">If it does not exist, nothing will appear.</p>
+    </div>
+</div>
+<div class="container" style="margin-top: 10px;">
     <div th:each="entry : ${rooms}" th:with="roomList=${entry.value}">
         <div class="alert alert-success" role="alert">
-            <p>The name of my room: <a th:text="${entry.key}"></a></p>
-            <p th:each="room : ${roomList}">My room's ID: <strong th:text="${room.id}"></strong></p>
+            <p>The name of room: <a th:text="${entry.key}"></a></p>
+            <p th:each="room : ${roomList}">Room's ID: <strong th:text="${room.id}"></strong></p>
             <p><a th:each="room:${roomList}" th:href="@{/rooms/} + ${room.id} + @{/items}+'?name='+${room.roomName}">Go to room</a></p>
         </div>
     </div>
