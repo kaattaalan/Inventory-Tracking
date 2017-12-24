@@ -19,5 +19,7 @@ public interface RoomService  {
 
     Room assignRoom(String username, long roomId);
 
+    void deleteRoomById(long id);
+
 
 }

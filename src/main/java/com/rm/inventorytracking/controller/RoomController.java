@@ -82,6 +82,24 @@ public class RoomController {
         return "redirect:/rooms";
     }
 
+    @RequestMapping(value = "/rooms/{id}", method = RequestMethod.DELETE)
+    public String handleRoomDelete(@PathVariable Long id){
+        if(roomService.getRoomById(id).getItems().isEmpty())
+        {
+            roomService.deleteRoomById(id);
+            return "redirect:/rooms";
+        }
+
+        return getDeleteRoomPage();
+
+
+    }
+    @RequestMapping("/deleteRoom")
+    public String getDeleteRoomPage(){
+        return "/deleteRoom";
+
+    }
+
 
 
 
