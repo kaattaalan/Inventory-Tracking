@@ -38,12 +38,13 @@ public class RoomController {
     }
 
 
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping("/rooms/add")
     public ModelAndView getAddRoomPage(){
         return new ModelAndView("addroom","room", new Room());
 
     }
+
 
     @RequestMapping(value = "/rooms/add", method = RequestMethod.POST)
     public String handleAddRoomForm(@Valid @ModelAttribute("room") Room room, BindingResult bindingResult){
@@ -56,7 +57,7 @@ public class RoomController {
 
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+
     @RequestMapping("/rooms")
     public ModelAndView getRoomsPage(){
         Map<String, Object> model = new HashMap<String, Object>();
@@ -81,7 +82,7 @@ public class RoomController {
         roomService.assignRoom(form.getUsername(), id);
         return "redirect:/rooms";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/rooms/{id}", method = RequestMethod.DELETE)
     public String handleRoomDelete(@PathVariable Long id){
         if(roomService.getRoomById(id).getItems().isEmpty())

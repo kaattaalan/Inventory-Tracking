@@ -8,6 +8,7 @@ import com.rm.inventorytracking.service.ItemService;
 import com.rm.inventorytracking.service.RoomService;
 import com.rm.inventorytracking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +32,7 @@ public class ItemController {
         this.roomService = roomService;
 
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping("/items/add")
     public ModelAndView itemAddPage() {
         return new ModelAndView("addItem", "itemForm", new ItemAddForm());
@@ -61,7 +62,7 @@ public class ItemController {
         itemService.assignItem(form.getRoomName(),id);
         return "redirect:/items";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/items/{id}", method = RequestMethod.DELETE)
     public String handleItemDelete(@PathVariable Long id) {
         itemService.deleteItemById(id);
