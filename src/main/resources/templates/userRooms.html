@@ -44,7 +44,7 @@
         <div class="alert alert-success" role="alert">
             <p>The name of room: <a th:text="${entry.key}"></a></p>
             <p th:each="room : ${roomList}">Room's ID: <strong th:text="${room.id}"></strong></p>
-            <p><a th:each="room:${roomList}" th:href="@{/rooms/} + ${room.id} + @{/items}+'?name='+${room.roomName}">Go to room</a></p>
+            <p><a th:each="room:${roomList}" th:href="@{/rooms/} + ${room.id} + @{/items}+'?name='+${room.roomName}"><i class="fas fa-arrow-circle-right"></i> Go to room</a></p>
         </div>
     </div>
 </div>
