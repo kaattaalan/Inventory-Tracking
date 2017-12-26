@@ -13,7 +13,7 @@ public class Room {
     @Column(name = "id", nullable = false, updatable = false)
     private long id;
     @NotEmpty
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 50)
     @Column(name = "roomName", nullable = false, unique = true)
     private String roomName;
 
