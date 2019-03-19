@@ -52,7 +52,7 @@
                 <td><a th:href="@{/users/} + ${user.id} + @{/rooms}" th:text="${user.username}">Username</a></td>
                 <td th:text="${user.name}">Name</td>
                 <td th:text="${user.lastName}">Last Name</td>
-                <td><a sec:authorize="hasRole('ADMIN')" th:if="${#authentication.getName() == user.name}" th:href="@{/users/delete/} + ${user.id}">DELETE</a></td>
+                <td><a sec:authorize="hasRole('ADMIN')" th:if="${#authentication.getName() != user.username}" th:href="@{/users/delete/} + ${user.id}">DELETE</a></td>
             </tr>
         </table>
     </div>

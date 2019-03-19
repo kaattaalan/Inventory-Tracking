@@ -59,7 +59,9 @@ public class UserController {
 
 	@RequestMapping(value = "/users/delete/{id}")
 	public ModelAndView deleteUser(@PathVariable Long id) {
-		userService.deleteUserById(id);
+		if (null != userService.getUserById(id)) {
+			userService.deleteUserById(id);
+		}
 		return new ModelAndView("users", "users", userService.getUsers());
 	}
 
