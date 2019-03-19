@@ -57,12 +57,13 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/users/delete/{id}")
-	public ModelAndView deleteUser(@PathVariable Long id) {
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+	public String deleteUser(@PathVariable Long id) {
 		if (null != userService.getUserById(id)) {
 			userService.deleteUserById(id);
 		}
-		return new ModelAndView("users", "users", userService.getUsers());
+		return "redirect:/users";
 	}
 
 }

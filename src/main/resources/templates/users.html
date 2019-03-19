@@ -52,7 +52,9 @@
                 <td><a th:href="@{/users/} + ${user.id} + @{/rooms}" th:text="${user.username}">Username</a></td>
                 <td th:text="${user.name}">Name</td>
                 <td th:text="${user.lastName}">Last Name</td>
-                <td><a sec:authorize="hasRole('ADMIN')" th:if="${#authentication.getName() != user.username}" th:href="@{/users/delete/} + ${user.id}">DELETE</a></td>
+                <td> <form th:action="@{/users/} + ${user.id}" th:method="delete" th:if="${#authentication.getName() != user.username}">
+                    <input  class="btn btn-danger" type="submit" value="Delete" name="delete" sec:authorize="hasRole('ADMIN')" />
+                </form></td>
             </tr>
         </table>
     </div>
