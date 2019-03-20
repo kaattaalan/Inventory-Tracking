@@ -49,9 +49,9 @@ public class UserController {
 	@RequestMapping(value = "/users/add", method = RequestMethod.POST)
 	public String handleAddRoomForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
 
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
 			return "redirect:/users/add";
-
+		}
 		userService.addUser(user);
 		return "redirect:/users";
 

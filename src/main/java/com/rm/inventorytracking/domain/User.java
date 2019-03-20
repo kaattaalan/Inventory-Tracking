@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     @NotEmpty
-    @Size(min = 6, max = 20)
+    @Size(min = 6)
     @Column(name = "password", nullable = false)
     private String password;
     @NotEmpty

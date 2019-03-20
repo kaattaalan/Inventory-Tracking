@@ -1,22 +1,29 @@
 package com.rm.inventorytracking.service;
 
+import com.rm.inventorytracking.domain.Role;
 import com.rm.inventorytracking.domain.Room;
 import com.rm.inventorytracking.domain.User;
+import com.rm.inventorytracking.repository.RoleRepository;
 import com.rm.inventorytracking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 	private final UserRepository userRepository;
+	private RoleRepository roleRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository,RoleRepository roleRepository) {
 		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 	}
 
 	public User getUserByUsername(String username) {
@@ -25,6 +32,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override // user ekleme
 	public User addUser(User user) {
+		/*Role role = roleRepository.findByRole("USER");
+		user.setRoles(new HashSet<Role>(Arrays.asList(role)));*/
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 
