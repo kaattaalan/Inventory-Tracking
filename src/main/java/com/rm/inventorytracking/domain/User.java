@@ -2,19 +2,26 @@ package com.rm.inventorytracking.domain;
 
 
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-
-import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 public class User implements UserDetails {
@@ -27,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     @NotEmpty
-    @Size(min = 6, max = 20)
+    @Size(min = 6)
     @Column(name = "password", nullable = false)
     private String password;
     @NotEmpty
@@ -127,7 +134,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    //user rollerinin çekildiği yer
+    //where user roles were taken
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles()

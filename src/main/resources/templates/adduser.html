@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Add Item</title>
+    <title>Add user</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 </head>
@@ -23,11 +23,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/rooms"><i class="fas fa-archive"></i> Rooms</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="/items"><i class="fas fa-cubes"></i> Items</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/items/add" style="color: #d35400"><i class="fas fa-plus-circle"></i> Add Item</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/users/add" style="color: #8e44ad"><i class="fas fa-plus-circle"></i> Add user</a>
                         </li>
                     </ul>
                 </div>
@@ -39,26 +39,27 @@
     <div style="margin-top: 10px;">
         <div class="mx-auto" style="width: 400px; text-align: center">
             <div class="card bg-light mb-3" style="max-width: 20rem;">
-                <div class="card-header"><b>Add New Item</b></div>
+                <div class="card-header"><b>Add New User</b></div>
                 <div class="card-body">
-                    <form th:action="@{/items}" th:object="${itemForm}" method="post">
+                    <form th:action="@{/users/add}" th:object="${user}" method="post">
                         <div th:if="${param.error}">
-                            <p style="color: red">Invalid username or password.</p>
+                            <p style="color: red">Invalid user Details</p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleItemType">Item Type:</label>
-                            <input th:field="*{itemType}"  type="text" name="username" class="form-control" id="exampleItemType" aria-describedby="emailHelp" placeholder="Enter item type">
-                            <p th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}"> Room Name Error</p>
-                            <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleAmount">Amount:</label>
-                            <input th:field="*{amount}" type="text" name="username" class="form-control" id="exampleAmount" aria-describedby="emailHelp" placeholder="Enter amount">
-                            <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"> Room Name Error</p>
+                            <label for="exampleFirstName">First Name:</label>
+                            <input th:field="*{name}" type="text" name="name" class="form-control" id="exampleFirstName" aria-describedby="emailHelp" placeholder="Enter Name">
+                             <label for="exampleLastName">Last Name:</label>
+                            <input th:field="*{lastName}" type="text" name="lastName" class="form-control" id="exampleLastName" aria-describedby="emailHelp" placeholder="Enter Last Name">
+                             <label for="exampleUserName">User Name:</label>
+                            <input th:field="*{username}" type="text" name="username" class="form-control" id="exampleUserName" aria-describedby="emailHelp" placeholder="Enter user name">
+                              <label for="examplePassword">Password:</label>
+                            <input th:field="*{password}" type="password" name="password" class="form-control" id="examplePassword" aria-describedby="emailHelp" placeholder="Enter Password">
+                            
+                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> User Name Error</p>
                             <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p>
                         </div>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                        <button type="submit" class="btn btn-success btn-lg">Add</button>
+                        <button type="submit" class="btn btn-success btn-lg">Submit</button>
                     </form>
                 </div>
             </div>

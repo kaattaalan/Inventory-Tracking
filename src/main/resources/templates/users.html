@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 </head>
-<body style="background-color: #2c3e50"
+<body style="background-color: #2c3e50">
 <div class="container">
     <div class="row" style="padding-top: 10px;">
         <div class="col-md-12 col-sm-12">
@@ -30,6 +30,10 @@
                         <li class="nav-item active" sec:authorize="isAuthenticated()">
                             <a class="nav-link" th:href="@{/users}"><i class="fas fa-users"></i> Users</a>
                         </li>
+                        <li>
+                            <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/users/add" style="color: #8e44ad"><i class="fas fa-plus-circle"></i> Add User</a>
+                        </li>
+                         
                     </ul>
                 </div>
             </nav>
@@ -42,11 +46,15 @@
                 <th scope="col">User name</th>
                 <th scope="col">Name</th>
                 <th scope="col">Last name</th>
+                <th scope="col">-</th>
             </tr>
             <tr th:each="user : ${users}">
                 <td><a th:href="@{/users/} + ${user.id} + @{/rooms}" th:text="${user.username}">Username</a></td>
                 <td th:text="${user.name}">Name</td>
                 <td th:text="${user.lastName}">Last Name</td>
+                <td> <form th:action="@{/users/} + ${user.id}" th:method="delete" th:if="${#authentication.getName() != user.username}">
+                    <input  class="btn btn-danger" type="submit" value="Delete" name="delete" sec:authorize="hasRole('ADMIN')" />
+                </form></td>
             </tr>
         </table>
     </div>

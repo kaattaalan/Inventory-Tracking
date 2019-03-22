@@ -1,10 +1,11 @@
 package com.rm.inventorytracking.config;
-import com.rm.inventorytracking.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,36 +22,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebMvcSecurity
 @EnableWebSecurity
 class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsService userDetailsService;
-    /**
-     *
-     * configure methodu URL bazlı güvenliğin ayarlandığı kısım
-     * register ve home sayfaları hariç bütün sayfaları, giriş yapmamış kullanıcılara kapatıyoruz.
-     * login ve logout adreslerini de yine bu methodda belirtiyoruz.
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error")
-                .usernameParameter("username")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll();
-    }
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService);
-    }
+	/**
+	 *
+	 * configure method The URL-based security is set to close all the pages
+	 * except the register and home pages to non-users. The login and logout
+	 * addresses are also specified in this method.
+	 */
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.failureUrl("/login?error").usernameParameter("username").permitAll().and().logout()
+				.logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider());
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authProvider() {
+		DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
+		daoProvider.setPasswordEncoder(passwordEncoder());
+		daoProvider.setUserDetailsService(userDetailsService);
+		return daoProvider;
+	}
 
 }
