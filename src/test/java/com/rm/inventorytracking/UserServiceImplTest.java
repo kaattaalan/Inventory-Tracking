@@ -1,6 +1,7 @@
 package com.rm.inventorytracking;
 
 import com.rm.inventorytracking.domain.User;
+import com.rm.inventorytracking.repository.RoleRepository;
 import com.rm.inventorytracking.repository.UserRepository;
 import com.rm.inventorytracking.service.UserService;
 import com.rm.inventorytracking.service.UserServiceImpl;
@@ -32,9 +33,10 @@ public class UserServiceImplTest {
 
         @Autowired
         private UserRepository userRepository;
+        private RoleRepository rolerepository;
         @Bean
         UserService userService(){
-            return new UserServiceImpl(userRepository);
+            return new UserServiceImpl(userRepository,rolerepository);
         }
     }
 
