@@ -23,8 +23,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/rooms"><i class="fas fa-archive"></i> Rooms</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/items"><i class="fas fa-cubes"></i> Raw Materials</a>
+                         <li class="nav-item active">
+                            <a class="nav-link" href="/rawmaterials"><i class="fas fa-cubes"></i> Raw Materials</a>
                         </li>
                         <li class="nav-item">
                             <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/rawmaterials/add" style="color: #d35400"><i class="fas fa-plus-circle"></i> Add Raw Material</a>
@@ -42,17 +42,15 @@
     <table class="table table-striped" style="background-color: #ecf0f1;">
         <tr>
             <th scope="col"></th>
-            <th scope="col">Code</th>
             <th scope="col">Item type</th>
             <th scope="col">Unit</th>
         </tr>
-        <tr th:each="rawMaterialList : ${items}">
+        <tr th:each="item : ${rawMaterialList}">
             <td>
                 <form th:action="@{/rawmaterials/} + ${item.id}" th:method="delete">
                     <input  class="btn btn-danger" type="submit" value="Delete" name="delete" sec:authorize="hasRole('ADMIN')" />
                 </form>
             </td>
-            <td th:text="${item.code}">Code</td>
             <td th:text="${item.type}">Item type</td>
             <td th:text="${item.unit}">unit</td>
             

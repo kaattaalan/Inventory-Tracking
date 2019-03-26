@@ -9,4 +9,8 @@ public interface RawMaterialService {
 	void addRawMaterial(RawMaterial rawMaterial);
 	
 	List<RawMaterial> getRawMaterialList();
+	
+	void deleteRawMaterial(Long id);
+	
+	RawMaterial getRawMaterialById(Long id);
 }

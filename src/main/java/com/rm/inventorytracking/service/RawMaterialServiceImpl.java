@@ -37,4 +37,14 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 		return rawList;
 	}
 
+	@Override
+	public void deleteRawMaterial(Long id) {
+		rawMaterialrepo.delete(id);
+	}
+
+	@Override
+	public RawMaterial getRawMaterialById(Long id) {
+		return rawMaterialrepo.findOne(id);
+	}
+
 }
