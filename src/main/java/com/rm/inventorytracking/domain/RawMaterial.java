@@ -13,11 +13,12 @@ public class RawMaterial {
 	@Column(name = "id", nullable = false, updatable = false)
 	private long id;
 
-	@Column(name = "type", nullable = false)
+	@Column(name = "type", nullable = false, unique = true)
 	private String type;
 
 	@Column(name = "unit", nullable = false)
 	private String unit;
+	
 
 	public long getId() {
 		return id;
@@ -42,5 +43,6 @@ public class RawMaterial {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+
 
 }

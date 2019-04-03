@@ -13,4 +13,6 @@ public interface RawMaterialService {
 	void deleteRawMaterial(Long id);
 	
 	RawMaterial getRawMaterialById(Long id);
+	
+	boolean existsByType(String type);
 }

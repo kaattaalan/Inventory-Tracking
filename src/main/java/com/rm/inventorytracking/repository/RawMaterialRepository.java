@@ -12,4 +12,6 @@ import com.rm.inventorytracking.domain.RawMaterial;
  *
  */
 public interface RawMaterialRepository extends CrudRepository<RawMaterial, Long> {
+
+	public boolean existsByType(String type);
 }

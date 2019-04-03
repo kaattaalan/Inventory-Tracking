@@ -20,12 +20,14 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	public void addRawMaterial(RawMaterial rawMaterial) {
 		rawMaterialrepo.save(rawMaterial);
 	}
-
+	
+	
 	Iterable<RawMaterial> getAllRawMaterials() {
 		return rawMaterialrepo.findAll();
 
 	}
-
+	
+	@Override
 	public List<RawMaterial> getRawMaterialList() {
 		List<RawMaterial> rawList = new ArrayList<RawMaterial>();
 		Iterator iterator = getAllRawMaterials().iterator();
@@ -45,6 +47,11 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	@Override
 	public RawMaterial getRawMaterialById(Long id) {
 		return rawMaterialrepo.findOne(id);
+	}
+
+	@Override
+	public boolean existsByType(String type) {
+		return rawMaterialrepo.existsByType(type);
 	}
 
 }

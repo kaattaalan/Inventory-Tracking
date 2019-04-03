@@ -40,7 +40,7 @@ public class RawMaterialController {
 	@RequestMapping(value = "/rawmaterials/add", method = RequestMethod.POST)
 	public String addRawMaterial(@Valid @ModelAttribute("rawMaterial") RawMaterial rawMaterial,
 			BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || rawMaterialService.existsByType(rawMaterial.getType())) {
 			return "redirect:/rawmaterials/add";
 		}
 		rawMaterialService.addRawMaterial(rawMaterial);
