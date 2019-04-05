@@ -2,7 +2,6 @@ package com.rm.inventorytracking.service;
 
 import com.rm.inventorytracking.domain.Item;
 import com.rm.inventorytracking.domain.ItemAddForm;
-import com.rm.inventorytracking.domain.User;
 
 public interface ItemService {
 
