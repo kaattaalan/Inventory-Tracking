@@ -28,7 +28,7 @@ public class PurchaseController {
 
 	@RequestMapping("/purchase")
 	public ModelAndView getPurchasesPage() {
-		return new ModelAndView("purchases");
+		return new ModelAndView("purchases","purchases",purchaseService.getAllPurchases());
 	}
 
 	@RequestMapping("/purchase/add")

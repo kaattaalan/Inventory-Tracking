@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "purchase_details")
 public class PurchaseDetails {
 
 	@Id
@@ -17,16 +18,14 @@ public class PurchaseDetails {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
-	@Column(name = "purchase_id")
-	private long purchaseId;
-
 	@Column(name = "item_id")
 	private long itemId;
 
 	@Column(name = "item_quantity")
 	private Long itemQuantity;
 	
-	
+	@ManyToOne
+	@JoinColumn(name="purchase_id")
 	private Purchase purchase;
 	
 
@@ -36,14 +35,6 @@ public class PurchaseDetails {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public long getPurchaseId() {
-		return purchaseId;
-	}
-
-	public void setPurchaseId(long purchaseId) {
-		this.purchaseId = purchaseId;
 	}
 
 	public long getItemId() {
@@ -60,6 +51,14 @@ public class PurchaseDetails {
 
 	public void setItemQuantity(Long itemQuantity) {
 		this.itemQuantity = itemQuantity;
+	}
+
+	public Purchase getPurchase() {
+		return purchase;
+	}
+
+	public void setPurchase(Purchase purchase) {
+		this.purchase = purchase;
 	}
 
 }

@@ -1,8 +1,8 @@
 package com.rm.inventorytracking.domain;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "purchase")
 public class Purchase {
 
 	@Id
@@ -24,10 +26,14 @@ public class Purchase {
 
 	@Column(name = "remarks")
 	private String Remarks;
-	
-	@OneToMany(mappedBy = "purchaseId")
-	private Set<PurchaseDetails> purchaseDetails = new HashSet<>();
 
+	@OneToMany(mappedBy = "purchase")
+	private List<PurchaseDetails> purchaseDetails = new ArrayList<PurchaseDetails>();
+
+	public void addPurchaseDetails(PurchaseDetails details) {
+		this.purchaseDetails.add(details);
+		details.setPurchase(this);
+	}
 
 	public long getId() {
 		return id;
@@ -53,14 +59,12 @@ public class Purchase {
 		Remarks = remarks;
 	}
 
-	public Set<PurchaseDetails> getPurchaseDetails() {
+	public List<PurchaseDetails> getPurchasedetails() {
 		return purchaseDetails;
 	}
 
-	public void setPurchaseDetails(Set<PurchaseDetails> purchaseDetails) {
-		this.purchaseDetails = purchaseDetails;
+	public void setPurchasedetails(List<PurchaseDetails> purchasedetails) {
+		this.purchaseDetails = purchasedetails;
 	}
-
-	
 
 }
