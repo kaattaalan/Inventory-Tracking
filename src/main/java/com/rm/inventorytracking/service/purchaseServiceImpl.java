@@ -1,7 +1,6 @@
 package com.rm.inventorytracking.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +45,21 @@ public class purchaseServiceImpl implements PurchaseService {
 			purchaseList.add(purchase);
 		}
 		return purchaseList;
+	}
+
+	@Override
+	public Purchase getPurchaseById(Long id) {
+		return purchaseRepo.findOne(id);
+	}
+
+	@Override
+	public void deletepurchase(Purchase purchase) {
+		purchaseRepo.delete(purchase);
+	}
+
+	@Override
+	public void deletepurchaseById(Long id) {
+		purchaseRepo.delete(id);
 	}
 
 }

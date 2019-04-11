@@ -11,4 +11,10 @@ public interface PurchaseService {
 	
 	List<Purchase> getAllPurchases();
 	
+	Purchase getPurchaseById(Long id);
+	
+	void deletepurchase(Purchase purchase);
+
+	void deletepurchaseById(Long id);
+	
 }

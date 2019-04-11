@@ -19,7 +19,7 @@
         </tr>
         <tr th:each="purchase : ${purchases}">
             <td>
-                <form th:action="@{/purchases/} + ${purchase.id}" th:method="delete">
+                <form th:action="@{/purchase/} + ${purchase.id}" th:method="delete">
                     <input  class="btn btn-danger" type="submit" value="Delete" name="delete" sec:authorize="hasRole('ADMIN')" />
                 </form>
             </td>

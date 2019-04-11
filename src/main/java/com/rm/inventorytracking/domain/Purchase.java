@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Purchase {
 	@Column(name = "remarks")
 	private String Remarks;
 
-	@OneToMany(mappedBy = "purchase")
+	@OneToMany(mappedBy = "purchase", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<PurchaseDetails> purchaseDetails = new ArrayList<PurchaseDetails>();
 
 	public void addPurchaseDetails(PurchaseDetails details) {
