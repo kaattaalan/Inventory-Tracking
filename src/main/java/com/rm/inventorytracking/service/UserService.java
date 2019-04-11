@@ -1,9 +1,7 @@
 package com.rm.inventorytracking.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.rm.inventorytracking.domain.Room;
 import com.rm.inventorytracking.domain.User;
 
 public interface UserService {
@@ -16,9 +14,5 @@ public interface UserService {
     void deleteUserById(Long id);
 
     User getUserById(long id);
-    Map<String, List<Room>> numberOfRoomsByType(long userId);
-
-
-
 
 }

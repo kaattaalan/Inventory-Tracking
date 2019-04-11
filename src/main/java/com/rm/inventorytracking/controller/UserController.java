@@ -31,14 +31,6 @@ public class UserController {
 		return new ModelAndView("users", "users", userService.getUsers());
 	}
 
-	@RequestMapping(value = "/users/{id}/rooms")
-	public ModelAndView getUserPage(@PathVariable Long id) {
-		if (null == userService.getUserById(id))
-			throw new NoSuchElementException("User with id:" + id + " not found");
-		else
-			return new ModelAndView("userRooms", "rooms", userService.numberOfRoomsByType(id));
-	}
-
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping("/users/add")
 	public ModelAndView getAddUserPage() {

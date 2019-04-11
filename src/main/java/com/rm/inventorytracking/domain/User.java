@@ -50,17 +50,6 @@ public class User implements UserDetails {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Room> rooms;
-
-    public Set<Room> getRooms() {
-        return rooms;
-    }
-
-
-    public void setRooms(Set<Room> rooms) {
-        this.rooms = rooms;
-    }
 
     public User() {
     }

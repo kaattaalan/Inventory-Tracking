@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.rm.inventorytracking.domain.Purchase;
 import com.rm.inventorytracking.domain.PurchaseDetails;
-import com.rm.inventorytracking.domain.PurchaseDetailsRepository;
 import com.rm.inventorytracking.domain.PurchaseForm;
+import com.rm.inventorytracking.repository.PurchaseDetailsRepository;
 import com.rm.inventorytracking.repository.PurchaseRepository;
 
 @Service
