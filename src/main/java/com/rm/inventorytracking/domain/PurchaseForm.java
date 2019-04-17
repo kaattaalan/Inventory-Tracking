@@ -1,37 +1,41 @@
 package com.rm.inventorytracking.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseForm {
 
 	private Date purchaseDate;
 	private String remarks;
 
-	private long itemId;
-	private long itemCount;
-	
+	private List<PurchaseDetails> purchaseDetails = new ArrayList<PurchaseDetails>();
 	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
+
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
+
 	public String getRemarks() {
 		return remarks;
 	}
+
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public long getItemId() {
-		return itemId;
+
+	public List<PurchaseDetails> getPurchaseDetails() {
+		return purchaseDetails;
 	}
-	public void setItemId(long itemId) {
-		this.itemId = itemId;
+
+	public void setPurchaseDetails(List<PurchaseDetails> purchaseDetails) {
+		this.purchaseDetails = purchaseDetails;
 	}
-	public long getItemCount() {
-		return itemCount;
+
+	public void incrementPurchaseDetails(){
+		this.purchaseDetails.add(new PurchaseDetails());
 	}
-	public void setItemCount(long itemCount) {
-		this.itemCount = itemCount;
-	}
+
 }

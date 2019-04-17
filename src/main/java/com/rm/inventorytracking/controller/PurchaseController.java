@@ -29,7 +29,7 @@ public class PurchaseController {
 
 	@RequestMapping("/purchase")
 	public ModelAndView getPurchasesPage() {
-		return new ModelAndView("purchases","purchases",purchaseService.getAllPurchases());
+		return new ModelAndView("purchases", "purchases", purchaseService.getAllPurchases());
 	}
 
 	@RequestMapping("/purchase/add")
@@ -40,8 +40,18 @@ public class PurchaseController {
 		return mView;
 	}
 
-	@RequestMapping(value = "/purchase", method = RequestMethod.POST)
-	public String addItem(@Valid @ModelAttribute("itemForm") PurchaseForm form, BindingResult bindingResult) {
+	@RequestMapping(value = "/purchase/details", method = RequestMethod.POST)
+	public ModelAndView getAddPurchaseDetailsPage(@Valid @ModelAttribute("itemForm") PurchaseForm form,
+			BindingResult bindingResult) {
+		ModelAndView mView = new ModelAndView("addpurchasedetails");
+		form.incrementPurchaseDetails();
+		mView.addObject("purchase", form);
+		mView.addObject("items", rawMaterialService.getRawMaterialList());
+		return mView;
+	}
+
+	@RequestMapping(value = "/purchase", method = RequestMethod.POST , params="action=save")
+	public String savePurchase(@Valid @ModelAttribute("purchase") PurchaseForm form, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return "addPurchase";
 		}
@@ -49,6 +59,15 @@ public class PurchaseController {
 		return "redirect:/purchase";
 	}
 	
+	@RequestMapping(value = "/purchase", method = RequestMethod.POST, params="action=add")
+	public ModelAndView addRowToPurchase(@Valid @ModelAttribute("purchase") PurchaseForm form, BindingResult bindingResult) {
+		ModelAndView mView = new ModelAndView("addpurchasedetails");
+		form.incrementPurchaseDetails();
+		mView.addObject("purchase", form);
+		mView.addObject("items", rawMaterialService.getRawMaterialList());
+		return mView;
+	}
+
 	@RequestMapping(value = "/purchase/{id}", method = RequestMethod.DELETE)
 	public String deletePurchase(@PathVariable Long id) {
 		if (null != purchaseService.getPurchaseById(id)) {
@@ -56,4 +75,5 @@ public class PurchaseController {
 		}
 		return "redirect:/purchase";
 	}
+
 }

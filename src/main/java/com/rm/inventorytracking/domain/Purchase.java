@@ -28,7 +28,7 @@ public class Purchase {
 	@Column(name = "remarks")
 	private String Remarks;
 
-	@OneToMany(mappedBy = "purchase", orphanRemoval = true, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "purchase", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<PurchaseDetails> purchaseDetails = new ArrayList<PurchaseDetails>();
 
 	public void addPurchaseDetails(PurchaseDetails details) {

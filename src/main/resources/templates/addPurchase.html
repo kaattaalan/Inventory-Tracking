@@ -16,7 +16,7 @@
             <div class="card bg-light mb-3" style="max-width: 20rem;">
                 <div class="card-header"><b>Add purchase</b></div>
                 <div class="card-body">
-                <form th:action="@{/purchase}" th:object="${purchase}" method="post">
+                <form th:action="@{/purchase/details}" th:object="${purchase}" method="post">
                         <div th:if="${param.error}">
                             <p style="color: red">Invalid user Details</p>
                         </div>
@@ -24,13 +24,7 @@
                             <label for="exampleDate">Date</label>
                             <input th:field="*{purchaseDate}" type="date" name="purchaseDate" class="form-control" id="exampleDate" aria-describedby="emailHelp" placeholder="Enter Date">
                              <label for="exampleMaterialType">Select Raw Material</label>
-                             <select th:field="*{itemId}" class="form-control" id="exampleItemId"> 
-    							<option th:each="i : ${items}" th:value="${i.id}" th:text="${i.type}">
-   								 </option>
-							</select>
-                             <label for="exampleQuantity">Quantity</label>
-                            <input th:field="*{itemCount}" type="number" name="itemCount" class="form-control" id="exampleItemCount" aria-describedby="emailHelp" placeholder="Enter Quantity">                  
-                            <label for="exampleRemarks">Remarks</label>
+                             <label for="exampleRemarks">Remarks</label>
                             <input th:field="*{remarks}" type="area" name="remarks" class="form-control" id="exampleRemarks" aria-describedby="emailHelp" placeholder="Enter Remarks">
                             <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p>
                         </div>

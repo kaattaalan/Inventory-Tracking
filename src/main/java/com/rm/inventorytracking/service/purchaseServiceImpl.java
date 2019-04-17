@@ -2,6 +2,7 @@ package com.rm.inventorytracking.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,13 @@ public class purchaseServiceImpl implements PurchaseService {
 		Purchase purchase = new Purchase();
 		purchase.setDate(form.getPurchaseDate());
 		purchase.setRemarks(form.getRemarks());
-
-		PurchaseDetails purchaseDetails = new PurchaseDetails();
-		purchaseDetails.setItemId(form.getItemId());
-		purchaseDetails.setItemQuantity(form.getItemCount());
-		purchase.addPurchaseDetails(purchaseDetails);
+		purchase = purchaseRepo.save(purchase);
+		for (PurchaseDetails purchaseDetails : form.getPurchaseDetails()) {
+			purchaseDetails.setPurchase(purchase);
+			purchase.addPurchaseDetails(purchaseDetails);
+			purchaseDetailsrepo.save(purchaseDetails);
+		}
 		purchaseRepo.save(purchase);
-		purchaseDetailsrepo.save(purchaseDetails);
 	}
 
 	@Override

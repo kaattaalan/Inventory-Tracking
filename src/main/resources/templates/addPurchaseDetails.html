@@ -12,30 +12,36 @@
 </div>
 <div class="container">
     <div style="margin-top: 10px;">
-        <div class="mx-auto" style="width: 400px; text-align: center">
-            <div class="card bg-light mb-3" style="max-width: 20rem;">
+        <div class="mx-auto" style="width: 800px; text-align: center">
+            <div class="card bg-light mb-3" style="max-width: 40rem;">
                 <div class="card-header"><b>Add Purchase Details</b></div>
                 <div class="card-body">
                 <form th:action="@{/purchase}" th:object="${purchase}" method="post">
                         <div th:if="${param.error}">
                             <p style="color: red">Invalid user Details</p>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleDate">Date</label>
-                            <input th:field="*{purchaseDate}" type="date" name="purchaseDate" class="form-control" id="exampleDate" aria-describedby="emailHelp" placeholder="Enter Date">
-                             <label for="exampleMaterialType">Select Raw Material</label>
-                             <select th:field="*{itemId}" class="form-control" id="exampleItemId"> 
+                       	 <table class="table table-striped" style="background-color: #ecf0f1;">
+                        	<tr>
+                        		<th style="width: 50%">Raw Material</th>
+                        		<th>Quantity</th>
+							</tr>
+                        	<tr th:each="detail ,itrStat: ${purchase.purchaseDetails}" class="form-group">
+                            <td> <select th:field="*{purchaseDetails[__${itrStat.index}__].itemId}" class="form-control" id="exampleItemId"> 
     							<option th:each="i : ${items}" th:value="${i.id}" th:text="${i.type}">
    								 </option>
 							</select>
-                             <label for="exampleQuantity">Quantity</label>
-                            <input th:field="*{itemCount}" type="number" name="itemCount" class="form-control" id="exampleItemCount" aria-describedby="emailHelp" placeholder="Enter Quantity">                  
-                            <label for="exampleRemarks">Remarks</label>
-                            <input th:field="*{remarks}" type="area" name="remarks" class="form-control" id="exampleRemarks" aria-describedby="emailHelp" placeholder="Enter Remarks">
-                            <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p>
-                        </div>
+							</td>
+                            <td>
+                            <input th:field="*{purchaseDetails[__${itrStat.index}__].itemQuantity}" type="number" name="itemCount" class="form-control" id="exampleItemCount" aria-describedby="emailHelp" placeholder="Enter Quantity">                  
+                             </td>
+                             <td> <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p></td>
+                            </tr>
+                        	</table>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                        <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                        <input  type="hidden" th:field="*{purchaseDate}" th:value="${purchaseDate}" />
+                        <input  type="hidden" th:field="*{remarks}" th:value="${remarks}" />
+                        <button type="submit" name="action" value="save" class="btn btn-success btn-lg">Submit</button>
+                        <button type="submit" name="action" value="add" class="btn btn-success btn-lg">Add Row</button>
                     </form>
                 </div>
             </div>
