@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rm.inventorytracking.domain.PurchaseForm;
+import com.rm.inventorytracking.dao.PurchaseForm;
 import com.rm.inventorytracking.service.PurchaseService;
 import com.rm.inventorytracking.service.RawMaterialService;
 

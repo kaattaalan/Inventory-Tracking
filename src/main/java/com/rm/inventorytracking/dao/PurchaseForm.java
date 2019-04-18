@@ -1,8 +1,10 @@
-package com.rm.inventorytracking.domain;
+package com.rm.inventorytracking.dao;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.rm.inventorytracking.domain.PurchaseDetails;
 
 public class PurchaseForm {
 

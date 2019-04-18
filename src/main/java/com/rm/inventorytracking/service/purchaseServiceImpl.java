@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rm.inventorytracking.dao.PurchaseForm;
 import com.rm.inventorytracking.domain.Purchase;
 import com.rm.inventorytracking.domain.PurchaseDetails;
-import com.rm.inventorytracking.domain.PurchaseForm;
 import com.rm.inventorytracking.repository.PurchaseDetailsRepository;
 import com.rm.inventorytracking.repository.PurchaseRepository;
 
