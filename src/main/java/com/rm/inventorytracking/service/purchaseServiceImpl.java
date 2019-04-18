@@ -2,7 +2,6 @@ package com.rm.inventorytracking.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,11 +30,12 @@ public class purchaseServiceImpl implements PurchaseService {
 		purchase.setRemarks(form.getRemarks());
 		purchase = purchaseRepo.save(purchase);
 		for (PurchaseDetails purchaseDetails : form.getPurchaseDetails()) {
-			purchaseDetails.setPurchase(purchase);
-			purchase.addPurchaseDetails(purchaseDetails);
-			purchaseDetailsrepo.save(purchaseDetails);
+			if (purchaseDetails.getItemQuantity() != null) {
+				purchaseDetails.setPurchase(purchase);
+				purchase.addPurchaseDetails(purchaseDetails);
+				purchaseDetailsrepo.save(purchaseDetails);
+			}
 		}
-		purchaseRepo.save(purchase);
 	}
 
 	@Override
@@ -61,6 +61,34 @@ public class purchaseServiceImpl implements PurchaseService {
 	@Override
 	public void deletepurchaseById(Long id) {
 		purchaseRepo.delete(id);
+	}
+
+	@Override
+	public PurchaseForm createPurchaseFormById(Long id) {
+		PurchaseForm form = new PurchaseForm();
+		Purchase purchase = purchaseRepo.findOne(id);
+		if (purchase == null) {
+			return null;
+		}
+		form.setPurchaseId(id);
+		form.setPurchaseDate(purchase.getDate());
+		form.setRemarks(purchase.getRemarks());
+		form.setPurchaseDetails(purchase.getPurchasedetails());
+		return form;
+	}
+
+	@Override
+	public void updatePurchase(PurchaseForm form) {
+		Purchase purchase = purchaseRepo.findOne(form.getPurchaseId());
+		purchaseDetailsrepo.delete(purchase.getPurchasedetails());
+		purchase.clearPurchasedetails();
+		for (PurchaseDetails purchaseDetails : form.getPurchaseDetails()) {
+			if (purchaseDetails.getItemQuantity() != null) {
+				purchaseDetails.setPurchase(purchase);
+				purchase.addPurchaseDetails(purchaseDetails);
+				purchaseDetailsrepo.save(purchaseDetails);
+			}
+		}
 	}
 
 }

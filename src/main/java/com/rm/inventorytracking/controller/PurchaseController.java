@@ -44,23 +44,27 @@ public class PurchaseController {
 	public ModelAndView getAddPurchaseDetailsPage(@Valid @ModelAttribute("itemForm") PurchaseForm form,
 			BindingResult bindingResult) {
 		ModelAndView mView = new ModelAndView("addpurchasedetails");
-		form.incrementPurchaseDetails();
 		mView.addObject("purchase", form);
 		mView.addObject("items", rawMaterialService.getRawMaterialList());
 		return mView;
 	}
 
-	@RequestMapping(value = "/purchase", method = RequestMethod.POST , params="action=save")
+	@RequestMapping(value = "/purchase", method = RequestMethod.POST, params = "action=save")
 	public String savePurchase(@Valid @ModelAttribute("purchase") PurchaseForm form, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return "addPurchase";
 		}
-		purchaseService.addPurchase(form);
+		if(form.getPurchaseId() == null){
+			purchaseService.addPurchase(form);
+		}else{
+			purchaseService.updatePurchase(form);
+		}
 		return "redirect:/purchase";
 	}
-	
-	@RequestMapping(value = "/purchase", method = RequestMethod.POST, params="action=add")
-	public ModelAndView addRowToPurchase(@Valid @ModelAttribute("purchase") PurchaseForm form, BindingResult bindingResult) {
+
+	@RequestMapping(value = "/purchase", method = RequestMethod.POST, params = "action=add")
+	public ModelAndView addRowToPurchase(@Valid @ModelAttribute("purchase") PurchaseForm form,
+			BindingResult bindingResult) {
 		ModelAndView mView = new ModelAndView("addpurchasedetails");
 		form.incrementPurchaseDetails();
 		mView.addObject("purchase", form);
@@ -74,6 +78,15 @@ public class PurchaseController {
 			purchaseService.deletepurchaseById(id);
 		}
 		return "redirect:/purchase";
+	}
+
+	@RequestMapping(value = "/purchase/view/{id}", method = RequestMethod.GET)
+	public ModelAndView viewPurchase(@PathVariable Long id) {
+		PurchaseForm form = purchaseService.createPurchaseFormById(id);
+		ModelAndView mView = new ModelAndView("addpurchasedetails");
+		mView.addObject("purchase", form);
+		mView.addObject("items", rawMaterialService.getRawMaterialList());
+		return mView;
 	}
 
 }

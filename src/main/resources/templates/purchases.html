@@ -13,18 +13,25 @@
 <div class="container">
     <table class="table table-striped" style="background-color: #ecf0f1;">
         <tr>
-            <th scope="col"></th>
             <th scope="col">Date</th>
             <th scope="col">Remarks</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         <tr th:each="purchase : ${purchases}">
+            
+            <td th:text="${purchase.date}">Date</td>
+            <td th:text="${purchase.remarks}">Remarks</td>
             <td>
+                <form th:action="@{/purchase/view/} + ${purchase.id}" th:method="get">
+                    <input  class="btn btn-danger" type="submit" value="Edit" name="edit" />
+                </form>
+            </td>
+             <td>
                 <form th:action="@{/purchase/} + ${purchase.id}" th:method="delete">
                     <input  class="btn btn-danger" type="submit" value="Delete" name="delete" sec:authorize="hasRole('ADMIN')" />
                 </form>
             </td>
-            <td th:text="${purchase.date}">Date</td>
-            <td th:text="${purchase.remarks}">Remarks</td>
         </tr>
     </table>
 </div>

@@ -8,6 +8,7 @@ import com.rm.inventorytracking.domain.PurchaseDetails;
 
 public class PurchaseForm {
 
+	private Long purchaseId;
 	private Date purchaseDate;
 	private String remarks;
 
@@ -34,6 +35,14 @@ public class PurchaseForm {
 
 	public void setPurchaseDetails(List<PurchaseDetails> purchaseDetails) {
 		this.purchaseDetails = purchaseDetails;
+	}
+
+	public Long getPurchaseId() {
+		return purchaseId;
+	}
+
+	public void setPurchaseId(Long purchaseId) {
+		this.purchaseId = purchaseId;
 	}
 
 	public void incrementPurchaseDetails(){

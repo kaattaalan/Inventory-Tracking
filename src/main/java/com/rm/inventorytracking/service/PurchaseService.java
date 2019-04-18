@@ -9,6 +9,8 @@ public interface PurchaseService {
 
 	void addPurchase(PurchaseForm form);
 	
+	void updatePurchase(PurchaseForm form);
+	
 	List<Purchase> getAllPurchases();
 	
 	Purchase getPurchaseById(Long id);
@@ -16,5 +18,7 @@ public interface PurchaseService {
 	void deletepurchase(Purchase purchase);
 
 	void deletepurchaseById(Long id);
+
+	PurchaseForm createPurchaseFormById(Long id);
 	
 }

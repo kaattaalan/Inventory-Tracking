@@ -23,7 +23,6 @@
                         <div class="form-group">
                             <label for="exampleDate">Date</label>
                             <input th:field="*{purchaseDate}" type="date" name="purchaseDate" class="form-control" id="exampleDate" aria-describedby="emailHelp" placeholder="Enter Date">
-                             <label for="exampleMaterialType">Select Raw Material</label>
                              <label for="exampleRemarks">Remarks</label>
                             <input th:field="*{remarks}" type="area" name="remarks" class="form-control" id="exampleRemarks" aria-describedby="emailHelp" placeholder="Enter Remarks">
                             <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"> Global Error</p>

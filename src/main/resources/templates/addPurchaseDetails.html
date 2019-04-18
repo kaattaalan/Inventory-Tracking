@@ -38,10 +38,11 @@
                             </tr>
                         	</table>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <input  type="hidden" th:field="*{purchaseId}" th:value="${purchaseId}" />
                         <input  type="hidden" th:field="*{purchaseDate}" th:value="${purchaseDate}" />
                         <input  type="hidden" th:field="*{remarks}" th:value="${remarks}" />
                         <button type="submit" name="action" value="save" class="btn btn-success btn-lg">Submit</button>
-                        <button type="submit" name="action" value="add" class="btn btn-success btn-lg">Add Row</button>
+                        <button type="submit" name="action" value="add" class="btn btn-primary btn-lg">Add Row</button>
                     </form>
                 </div>
             </div>

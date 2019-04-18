@@ -22,7 +22,7 @@ public class Purchase {
 	@Column(name = "id", nullable = false, updatable = false)
 	private long id;
 
-	@Column(name = "date")
+	@Column(name = "date", nullable = false	)
 	private Date date;
 
 	@Column(name = "remarks")
@@ -34,6 +34,10 @@ public class Purchase {
 	public void addPurchaseDetails(PurchaseDetails details) {
 		this.purchaseDetails.add(details);
 		details.setPurchase(this);
+	}
+
+	public void clearPurchasedetails() {
+		this.purchaseDetails.clear();
 	}
 
 	public long getId() {

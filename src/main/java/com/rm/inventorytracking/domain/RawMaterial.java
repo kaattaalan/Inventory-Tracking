@@ -19,6 +19,9 @@ public class RawMaterial {
 	@Column(name = "unit", nullable = false)
 	private String unit;
 	
+	@Column(name = "count")
+	private int count;
+	
 
 	public long getId() {
 		return id;
@@ -42,6 +45,14 @@ public class RawMaterial {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 
